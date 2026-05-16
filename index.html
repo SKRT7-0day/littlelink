@@ -79,7 +79,7 @@
         margin-top: 50px;
       }
 
-      /* ستايل زر التبديل الاحترافي */
+      /* ستايل زر التبديل الدائري المصغر الجديد */
       .theme-toggle-btn {
         position: absolute;
         top: 20px;
@@ -87,18 +87,37 @@
         background: var(--card-bg);
         border: 1px solid var(--btn-border);
         color: var(--text-color);
-        padding: 10px 14px;
-        border-radius: 12px;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
         cursor: pointer;
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        transition: background-color 0.3s, color 0.3s, transform 0.2s;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        transition: background-color 0.3s, color 0.3s, transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
       }
+
+      /* تأثير حركي خفيف عند تمرير الماوس أو اللمس */
       .theme-toggle-btn:hover {
-        transform: scale(1.05);
+        transform: scale(1.1);
+      }
+
+      /* تأثير حركة النبض والدوران عند الضغط النشط */
+      .theme-toggle-btn:active {
+        transform: scale(0.9) rotate(30deg);
+      }
+
+      /* أنيميشن ناعم للأيقونة بداخل الزر لكي تتغير بسلاسة */
+      .theme-toggle-btn span {
+        display: inline-block;
+        transition: transform 0.3s ease;
+      }
+      .theme-toggle-btn:active span {
+        transform: scale(0.8);
       }
     </style>
   </head>
@@ -106,7 +125,7 @@
 <body>
 
   <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle Theme">
-    🌙
+    <span id="themeIcon">🌙</span>
   </button>
 
   <div class="container">
@@ -157,32 +176,33 @@
 
   <script>
     const themeToggleBtn = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
     const currentTheme = localStorage.getItem('theme');
 
-    // التحقق من الثيم المحفوظ سابقاً
+    // التحقق من حالة الثيم المحفوظة مسبقاً في المتصفح
     if (currentTheme === 'light') {
       document.body.classList.add('light-theme');
-      themeToggleBtn.textContent = '☀️';
+      themeIcon.textContent = '☀️';
     } else {
-      themeToggleBtn.textContent = '🌙';
+      themeIcon.textContent = '🌙';
     }
 
-    // عند الضغط على الزر
+    // إضافة مستمع الأحداث لتطبيق الأنيميشن وتغيير الألوان عند الضغط
     themeToggleBtn.addEventListener('click', () => {
       document.body.classList.toggle('light-theme');
       
       let theme = 'dark';
       if (document.body.classList.contains('light-theme')) {
         theme = 'light';
-        themeToggleBtn.textContent = '☀️';
+        themeIcon.textContent = '☀️';
       } else {
-        themeToggleBtn.textContent = '🌙';
+        themeIcon.textContent = '🌙';
       }
       
-      // حفظ خيار المستخدم
       localStorage.setItem('theme', theme);
     });
   </script>
 
 </body>
 </html>
+
