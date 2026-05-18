@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>SKRT7 | Bio</title>
-    <link rel="icon" type="image/x-icon" href="images/avatar.png">
+    <link class="fav-icon" rel="icon" type="image/x-icon" href="images/avatar.png">
 
     <meta name="description" content="SKRT7 Personal Space and Links">
     <meta name="author" content="SKRT7">
@@ -47,7 +47,7 @@
       }
       .avatar:hover { transform: scale(1.05); }
       
-      /* 📦 حاوية خارجية جديدة لكل زر تحميه من التخريب وتحمل Jinx بالخارج */
+      /* 📦 حاوية الحماية الخارجية للزر - تحافظ على ثبات حركة الشاحنة بالداخل بالكامل */
       .button-wrapper {
         position: relative;
         width: 100%;
@@ -59,7 +59,7 @@
         width: 100%;
         border-radius: 16px !important;
         font-weight: 600 !important;
-        margin-bottom: 0px !important; /* تم نقل الهامش للحاوية الخارجية */
+        margin-bottom: 0px !important;
         border: 1px solid var(--btn-border) !important;
         box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         transition: transform 0.2s ease, box-shadow 0.2s ease !important;
@@ -115,12 +115,12 @@
       }
 
       /* ==========================================
-         🔥 كود حركة الشحن الأصلي القديم (مضمون 100%) 🔥
-         ========================================= */
+         🚚 كود الشاحنة القديم الأصلي (مضمون ومحمي) 🚚
+         ========================================== */
       .ship-btn {
         appearance: none;
         position: relative;
-        overflow: hidden !important; /* حبس الشاحنة بالداخل بنجاح */
+        overflow: hidden !important; /* حبس الشاحنة داخل حدود الزر بنجاح */
         cursor: pointer;
         height: 52px !important; 
         border-radius: 32px !important;
@@ -171,31 +171,50 @@
       }
 
       /* ==========================================
-         💙 ستايل حركة Jinx المخصصة للرابط المرسل 💙
-         ========================================= */
-      .jinx-peeker {
+         💙 Jinx Peek-a-boo CSS Animation (مستقر 100%) 💙
+         ========================================== */
+      .jinx-peeker-glow {
         position: absolute;
-        top: -46px; /* تطل بدقة من خلف الزر */
-        right: 15px;
-        width: 55px; /* حجم متناسق للـ GIF */
-        height: auto;
-        z-index: 10; /* تظهر فوق حدود الزر الخلفية */
+        top: -16px; /* تطل من أعلى الزر بدقة */
+        right: 30px;
+        width: 22px;
+        height: 22px;
+        background: #00f0ff; /* لون شعر جينكس الأزرق المشع */
+        border-radius: 50%;
+        z-index: 1; /* تظهر من خلف الزر ثلاثي الأبعاد */
         pointer-events: none;
-        border-radius: 8px;
-        transform: translateY(15px);
+        box-shadow: 0 0 12px #00f0ff, 0 0 25px #0055ff;
         opacity: 0;
-        /* أنميشن ظهور سلس، ثم حركة اهتزاز طفيفة متناسقة مع الـ GIF */
-        animation: jinxAppear 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s forwards,
-                  jinxFloat 2.5s ease-in-out infinite alternate;
+        transform: translateY(15px) scale(0.6);
+        /* أنميشن الظهور المستقر واللطيف */
+        animation: jinxGlowAppear 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s forwards,
+                  jinxGlowPulse 1.5s ease-in-out infinite alternate;
       }
 
-      @keyframes jinxAppear {
-        to { transform: translateY(0); opacity: 1; }
+      /* إضافة تفاصيل الضفيرة الصغيرة المميزة لجينكس بالـ CSS */
+      .jinx-peeker-glow::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        right: 4px;
+        width: 5px;
+        height: 14px;
+        background: #00faee;
+        border-radius: 4px;
+        transform: rotate(25deg);
+        box-shadow: 0 0 8px #00f0ff;
       }
 
-      @keyframes jinxFloat {
-        0% { transform: translateY(0) rotate(0deg); }
-        100% { transform: translateY(-3px) rotate(3deg); }
+      @keyframes jinxGlowAppear {
+        to {
+          transform: translateY(0) scale(1);
+          opacity: 0.9;
+        }
+      }
+
+      @keyframes jinxGlowPulse {
+        0% { transform: translateY(0) scale(1); box-shadow: 0 0 10px #00f0ff; }
+        100% { transform: translateY(-5px) scale(1.05); box-shadow: 0 0 20px #00f0ff, 0 0 30px #a855f7; }
       }
     </style>
   </head>
@@ -287,7 +306,7 @@
   </div>
 
   <script>
-    // تشغيل الأنيميشن الأصلي الشغال بدون تعديل في المنطق
+    // تشغيل كود الأزرار والشاحنة القديم (مستقر بدون أي تغيير)
     document.querySelectorAll('.ship-btn').forEach(button => {
       button.addEventListener('click', function(e) {
         e.preventDefault();
@@ -297,48 +316,45 @@
         
         this.classList.add('animating');
         
-        // إخفاء جينكس فوراً بمجرد الضغط على الزر لكي لا تعطل المشهد
+        // إخفاء الأيقونة المضيئة عند تفعيل الشاحنة للزر المختار
         const wrapper = this.closest('.button-wrapper');
-        const jinx = wrapper ? wrapper.querySelector('.jinx-peeker') : null;
-        if(jinx) jinx.style.opacity = '0';
-        
+        const peeker = wrapper ? wrapper.querySelector('.jinx-peeker-glow') : null;
+        if(peeker) peeker.style.opacity = '0';
+
         setTimeout(() => {
           window.location.href = targetUrl;
         }, 1700);
       });
     });
 
-    // سكريبت إدراج Jinx عشوائياً باستخدام رابط Tenor المباشر المستقر
-    function injectRandomJinx() {
-      // إزالة جينكس القديمة
-      document.querySelectorAll('.jinx-peeker').forEach(el => el.remove());
+    // دالة اختيار زر عشوائي وحقن أيقونة جينكس المضيئة والمتحركة بـ CSS
+    function injectRandomPeeker() {
+      // تنظيف الأيقونات السابقة لمنع التكرار
+      document.querySelectorAll('.jinx-peeker-glow').forEach(el => el.remove());
 
       const allWrappers = document.querySelectorAll('.button-wrapper');
       if (allWrappers.length > 0) {
         const randomIndex = Math.floor(Math.random() * allWrappers.length);
         const selectedWrapper = allWrappers[randomIndex];
 
-        const jinxImg = document.createElement('img');
-        // 🔥 هذا هو الرابط المباشر للـ GIF الشغال 100% من الرابط الذي أرسلته 🔥
-        jinxImg.src = 'https://media.tenor.com/v8t_Xm_7X_EAAAAC/shrug-jinx.gif'; 
-        jinxImg.className = 'jinx-peeker';
-        jinxImg.alt = 'Jinx';
+        const glowDiv = document.createElement('div');
+        glowDiv.className = 'jinx-peeker-glow';
 
-        // نضعها داخل الـ wrapper الخارجي لكي تظل الشاحنة مغلقة بالداخل وجينكس تظهر بالخارج
-        selectedWrapper.appendChild(jinxImg);
+        // وضع الأيقونة داخل الحاوية الخارجية لحماية الأزرار من التعليق
+        selectedWrapper.appendChild(glowDiv);
       }
     }
 
-    // تشغيل عند تحميل الصفحة
-    window.addEventListener('DOMContentLoaded', injectRandomJinx);
+    // تشغيل الدالة فور تحميل الصفحة
+    window.addEventListener('DOMContentLoaded', injectRandomPeeker);
 
-    // إصلاح مشكلة الرجوع وإعادة الضبط وتغيير مكان Jinx عشوائياً
+    // إعادة الضبط والانعاش العشوائي عند العودة للخلف في متصفح الهاتف
     window.addEventListener('pageshow', function(event) {
       if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
         document.querySelectorAll('.ship-btn').forEach(button => {
           button.classList.remove('animating');
         });
-        injectRandomJinx();
+        injectRandomPeeker();
       }
     });
 
