@@ -47,18 +47,12 @@
       }
       .avatar:hover { transform: scale(1.05); }
       
-      .button-wrapper {
-        position: relative;
-        width: 100%;
-        margin-bottom: 16px !important;
-      }
-
       .button {
         display: block;
         width: 100%;
         border-radius: 16px !important;
         font-weight: 600 !important;
-        margin-bottom: 0px !important;
+        margin-bottom: 16px !important;
         border: 1px solid var(--btn-border) !important;
         box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         transition: transform 0.2s ease, box-shadow 0.2s ease !important;
@@ -114,8 +108,8 @@
       }
 
       /* ==========================================
-         🚚 كود أنميشن الشاحنة الانسيابي والمحمي 🚚
-         ========================================== */
+         🔥 ستايل حركة الشحن العام لجميع الأزرار 🔥
+         ========================================= */
       .ship-btn {
         appearance: none;
         position: relative;
@@ -127,7 +121,6 @@
         -webkit-tap-highlight-color: transparent;
       }
 
-      /* محتوى الزر الطبيعي (تم حذف مهم لمنع الاختراق) */
       .ship-btn .btn-content {
         display: flex;
         align-items: center;
@@ -149,16 +142,32 @@
         pointer-events: none;
       }
 
-      .ship-btn .truck { font-size: 1.7rem; z-index: 2; }
-      .ship-btn .box { font-size: 1.1rem; margin-left: -12px; opacity: 0; transform: translateY(-25px); z-index: 1; }
-
-      /* تفعيل إخفاء وتحريك النص بالكامل عند الضغط */
-      .ship-btn.animating .btn-content { 
-        transform: translateX(150%); 
-        opacity: 0; 
+      .ship-btn .truck {
+        font-size: 1.7rem;
+        z-index: 2;
       }
-      .ship-btn.animating .truck-container { animation: driveAndDeliver 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
-      .ship-btn.animating .box { animation: dropBoxInTruck 1.8s ease forwards; }
+
+      .ship-btn .box {
+        font-size: 1.1rem;
+        margin-left: -12px;
+        opacity: 0;
+        transform: translateY(-25px);
+        z-index: 1;
+      }
+
+      /* أنيميشن التنشيط */
+      .ship-btn.animating .btn-content {
+        transform: translateX(150%);
+        opacity: 0;
+      }
+
+      .ship-btn.animating .truck-container {
+        animation: driveAndDeliver 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+
+      .ship-btn.animating .box {
+        animation: dropBoxInTruck 1.8s ease forwards;
+      }
 
       @keyframes driveAndDeliver {
         0% { left: -60px; }
@@ -198,59 +207,47 @@
 
         <div class="button-stack" role="navigation">
 
-          <div class="button-wrapper">
-            <button class="button button-discord ship-btn" data-url="https://discord.gg/Vk8WJhpQW4" role="button">
-              <div class="btn-content">
-                <img class="icon" aria-hidden="true" src="images/icons/discord.svg" alt="Discord Logo">Discord
-              </div>
-              <div class="truck-container"><span class="truck">🚚</span><span class="box">📦</span></div>
-            </button>
-          </div>
+          <button class="button button-discord ship-btn" data-url="https://discord.gg/Vk8WJhpQW4" role="button">
+            <div class="btn-content">
+              <img class="icon" aria-hidden="true" src="images/icons/discord.svg" alt="Discord Logo">Discord
+            </div>
+            <div class="truck-container"><span class="truck">🚚</span><span class="box">📦</span></div>
+          </button>
 
-          <div class="button-wrapper">
-            <button class="button button-instagram ship-btn" data-url="https://www.instagram.com/skrt7_66?igsh=bWZzeHdhNDJtOGo2" role="button">
-              <div class="btn-content">
-                <img class="icon" aria-hidden="true" src="images/icons/instagram.svg" alt="Instagram Logo">Instagram
-              </div>
-              <div class="truck-container"><span class="truck">🚚</span><span class="box">📦</span></div>
-            </button>
-          </div>
+          <button class="button button-instagram ship-btn" data-url="https://www.instagram.com/skrt7_66?igsh=bWZzeHdhNDJtOGo2" role="button">
+            <div class="btn-content">
+              <img class="icon" aria-hidden="true" src="images/icons/instagram.svg" alt="Instagram Logo">Instagram
+            </div>
+            <div class="truck-container"><span class="truck">🚚</span><span class="box">📦</span></div>
+          </button>
 
-          <div class="button-wrapper">
-            <button class="button button-github ship-btn" data-url="https://github.com/SKRT7-0day" role="button">
-              <div class="btn-content">
-                <img class="icon" aria-hidden="true" src="images/icons/github.svg" alt="GitHub Logo">GitHub
-              </div>
-              <div class="truck-container"><span class="truck">🚚</span><span class="box">📦</span></div>
-            </button>
-          </div>
+          <button class="button button-github ship-btn" data-url="https://github.com/SKRT7-0day" role="button">
+            <div class="btn-content">
+              <img class="icon" aria-hidden="true" src="images/icons/github.svg" alt="GitHub Logo">GitHub
+            </div>
+            <div class="truck-container"><span class="truck">🚚</span><span class="box">📦</span></div>
+          </button>
 
-          <div class="button-wrapper">
-            <button class="button button-yt ship-btn" data-url="https://www.youtube.com/@SKRT7-v5h" role="button">
-              <div class="btn-content">
-                <img class="icon" aria-hidden="true" src="images/icons/youtube.svg" alt="YouTube Logo">YouTube
-              </div>
-              <div class="truck-container"><span class="truck">🚚</span><span class="box">📦</span></div>
-            </button>
-          </div>
+          <button class="button button-yt ship-btn" data-url="https://www.youtube.com/@SKRT7-v5h" role="button">
+            <div class="btn-content">
+              <img class="icon" aria-hidden="true" src="images/icons/youtube.svg" alt="YouTube Logo">YouTube
+            </div>
+            <div class="truck-container"><span class="truck">🚚</span><span class="box">📦</span></div>
+          </button>
 
-          <div class="button-wrapper">
-            <button class="button button-spotify ship-btn" data-url="https://open.spotify.com/user/315dy6lskacyrxfg42pk7x5atm44?si=9SMX0LY6QUeOpEpVEjsmMQ" role="button">
-              <div class="btn-content">
-                <img class="icon" aria-hidden="true" src="images/icons/spotify.svg" alt="Spotify Logo">Spotify
-              </div>
-              <div class="truck-container"><span class="truck">🚚</span><span class="box">📦</span></div>
-            </button>
-          </div>
+          <button class="button button-spotify ship-btn" data-url="https://open.spotify.com/user/315dy6lskacyrxfg42pk7x5atm44?si=9SMX0LY6QUeOpEpVEjsmMQ" role="button">
+            <div class="btn-content">
+              <img class="icon" aria-hidden="true" src="images/icons/spotify.svg" alt="Spotify Logo">Spotify
+            </div>
+            <div class="truck-container"><span class="truck">🚚</span><span class="box">📦</span></div>
+          </button>
 
-          <div class="button-wrapper">
-            <button class="button button-faceb ship-btn" style="background-color: #1877F2 !important; color: white !important;" data-url="https://www.facebook.com/share/18giPaZseb/" role="button">
-              <div class="btn-content">
-                <img class="icon" aria-hidden="true" src="images/icons/facebook.svg" alt="Facebook Logo">Facebook
-              </div>
-              <div class="truck-container"><span class="truck">🚚</span><span class="box">📦</span></div>
-            </button>
-          </div>
+          <button class="button button-faceb ship-btn" style="background-color: #1877F2 !important; color: white !important;" data-url="https://www.facebook.com/share/18giPaZseb/" role="button">
+            <div class="btn-content">
+              <img class="icon" aria-hidden="true" src="images/icons/facebook.svg" alt="Facebook Logo">Facebook
+            </div>
+            <div class="truck-container"><span class="truck">🚚</span><span class="box">📦</span></div>
+          </button>
 
         </div>
 
@@ -263,7 +260,7 @@
   </div>
 
   <script>
-    // تفعيل ضغط الأزرار والأنميشن والتوجه للرابط
+    // تشغيل الأنيميشن والتوجيه الآمن للهواتف
     document.querySelectorAll('.ship-btn').forEach(button => {
       button.addEventListener('click', function(e) {
         e.preventDefault();
@@ -279,31 +276,17 @@
       });
     });
 
-    // دالة التصفير الذكية عند إعادة إظهار الصفحة من الكاش (Back Button)
-    function resetButtonsState() {
-      document.querySelectorAll('.ship-btn').forEach(button => {
-        // حذف الكلاس لإيقاف الأنميشن وإرجاع الشاحنة
-        button.classList.remove('animating');
-        
-        // إرجاع استايل النص والإنعاش الفوري عنوة
-        const content = button.querySelector('.btn-content');
-        if (content) {
-          content.style.transform = 'none';
-          content.style.opacity = '1';
-        }
-      });
-    }
-
-    // تنظيف وتصفير المتصفح بمجرد الرجوع بالصفحة لخلف فوراً
+    // 🔥 حل مشكلة اختفاء النص عند العودة بـ زر الرجوع للخلف 🔥
     window.addEventListener('pageshow', function(event) {
-      resetButtonsState();
+      // إذا تم تحميل الصفحة من الكاش (أي عند الضغط على زر الرجوع)
+      if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+        document.querySelectorAll('.ship-btn').forEach(button => {
+          button.classList.remove('animating'); // إزالة الأنيميشن وإرجاع النصوص فوراً
+        });
+      }
     });
 
-    // تشغيل عند أول تحميل للصفحة
-    window.addEventListener('DOMContentLoaded', resetButtonsState);
-
-
-    // سكريبت حفظ وتبديل الوضع الليلي / النهاري
+    // سكريبت تبديل وحفظ الوضع ليلي / نهاري
     const themeToggleBtn = document.getElementById('themeToggle');
     const themeIcon = document.getElementById('themeIcon');
     const popoutIcon = document.getElementById('popoutIcon');
@@ -341,4 +324,3 @@
 
 </body>
 </html>
-
