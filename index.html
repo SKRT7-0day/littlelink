@@ -114,7 +114,7 @@
       }
 
       /* ==========================================
-         🚚 كود أنميشن الشاحنة المطور والمحمي من التجميد 🚚
+         🚚 كود أنميشن الشاحنة الانسيابي والمحمي 🚚
          ========================================== */
       .ship-btn {
         appearance: none;
@@ -127,15 +127,13 @@
         -webkit-tap-highlight-color: transparent;
       }
 
-      /* محتوى الزر الطبيعي (الاسم والأيقونة) */
+      /* محتوى الزر الطبيعي (تم حذف مهم لمنع الاختراق) */
       .ship-btn .btn-content {
         display: flex;
         align-items: center;
         justify-content: center;
         width: 100%;
         height: 100%;
-        transform: translateX(0) !important; /* الإجبار على الوضع الافتراضي */
-        opacity: 1 !important; /* الإجبار على الظهور الافتراضي */
         transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s;
       }
 
@@ -154,10 +152,10 @@
       .ship-btn .truck { font-size: 1.7rem; z-index: 2; }
       .ship-btn .box { font-size: 1.1rem; margin-left: -12px; opacity: 0; transform: translateY(-25px); z-index: 1; }
 
-      /* 🔥 تفعيل الأنميشن فقط عند وجود فئة animating بشكل صريح 🔥 */
+      /* تفعيل إخفاء وتحريك النص بالكامل عند الضغط */
       .ship-btn.animating .btn-content { 
-        transform: translateX(150%) !important; 
-        opacity: 0 !important; 
+        transform: translateX(150%); 
+        opacity: 0; 
       }
       .ship-btn.animating .truck-container { animation: driveAndDeliver 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
       .ship-btn.animating .box { animation: dropBoxInTruck 1.8s ease forwards; }
@@ -281,27 +279,27 @@
       });
     });
 
-    // دالة تصفير صارمة للتخلص من ذاكرة المتصفح المؤقتة (BFCache) لإعادة الأسماء فوراً
+    // دالة التصفير الذكية عند إعادة إظهار الصفحة من الكاش (Back Button)
     function resetButtonsState() {
       document.querySelectorAll('.ship-btn').forEach(button => {
-        // 1. حذف كلاس الأنميشن فوراً
+        // حذف الكلاس لإيقاف الأنميشن وإرجاع الشاحنة
         button.classList.remove('animating');
         
-        // 2. تصفير الستاين المكتوب بالـ JS بشكل صريح لضمان الإستجابة للوضع الطبيعي
+        // إرجاع استايل النص والإنعاش الفوري عنوة
         const content = button.querySelector('.btn-content');
         if (content) {
-          content.style.setProperty('transform', 'translateX(0)', 'important');
-          content.style.setProperty('opacity', '1', 'important');
+          content.style.transform = 'none';
+          content.style.opacity = '1';
         }
       });
     }
 
-    // التنظيف عند العودة للخلف في متصفحات الهواتف
+    // تنظيف وتصفير المتصفح بمجرد الرجوع بالصفحة لخلف فوراً
     window.addEventListener('pageshow', function(event) {
       resetButtonsState();
     });
 
-    // تنظيف إضافي عند التحميل الكامل للتأكيد
+    // تشغيل عند أول تحميل للصفحة
     window.addEventListener('DOMContentLoaded', resetButtonsState);
 
 
@@ -343,3 +341,4 @@
 
 </body>
 </html>
+
