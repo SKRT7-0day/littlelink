@@ -59,7 +59,7 @@
         width: 100%;
         border-radius: 16px !important;
         font-weight: 600 !important;
-        margin-bottom: 0px !important; /* الاعتماد على Wrapper */
+        margin-bottom: 0px !important;
         border: 1px solid var(--btn-border) !important;
         box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         transition: transform 0.2s ease, box-shadow 0.2s ease !important;
@@ -120,7 +120,7 @@
       .ship-btn {
         appearance: none;
         position: relative;
-        overflow: hidden !important; /* قفل الأزرار لحبس الشاحنات بالداخل ومنع خروجها */
+        overflow: hidden !important;
         cursor: pointer;
         height: 52px !important; 
         border-radius: 32px !important;
@@ -163,7 +163,6 @@
         z-index: 1;
       }
 
-      /* أنيميشن تشغيل الحركة */
       .ship-btn.animating .btn-content {
         transform: translateX(150%);
         opacity: 0;
@@ -196,16 +195,16 @@
          ========================================== */
       .jinx-peeker {
         position: absolute;
-        top: -36px; /* تطل من أعلى الزر بدقة */
-        right: 25px;
-        width: 42px;
-        height: 42px;
-        z-index: 10; /* فوق الزر تماماً لتظهر بوضوح */
+        top: -42px; /* تطل من أعلى الزر بدقة */
+        right: 20px;
+        width: 48px;
+        height: 48px;
+        z-index: 10;
         pointer-events: none;
         transform: translateY(15px);
         opacity: 0;
-        animation: jinxAppear 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s forwards,
-                  jinxFloat 2.5s ease-in-out infinite alternate;
+        animation: jinxAppear 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s forwards,
+                  jinxFloat 2s ease-in-out infinite alternate;
       }
 
       @keyframes jinxAppear {
@@ -217,7 +216,7 @@
 
       @keyframes jinxFloat {
         0% { transform: translateY(0) rotate(0deg); }
-        100% { transform: translateY(-3px) rotate(4deg); }
+        100% { transform: translateY(-3px) rotate(5deg); }
       }
     </style>
   </head>
@@ -309,7 +308,6 @@
   </div>
 
   <script>
-    // تشغيل أنيميشن الشاحنات والتوجيه عند الضغط على الأزرار
     document.querySelectorAll('.ship-btn').forEach(button => {
       button.addEventListener('click', function(e) {
         e.preventDefault();
@@ -319,7 +317,6 @@
         
         this.classList.add('animating');
         
-        // إخفاء Jinx فوراً عند تفعيل الأنميشن الخاص بالزر الحالي لكي لا تعطل المنظر
         const wrapper = this.closest('.button-wrapper');
         const jinx = wrapper ? wrapper.querySelector('.jinx-peeker') : null;
         if (jinx) jinx.style.opacity = '0';
@@ -330,76 +327,11 @@
       });
     });
 
-    // دالة وضع Jinx عشوائياً في الـ Wrapper الخاص بالزر
+    // دالة وضع Jinx برابطها العالمي الجديد المستقر
     function injectRandomJinx() {
-      // إزالة أي ظهور قديم لـ Jinx تماماً لمنع التراكم
       document.querySelectorAll('.jinx-peeker').forEach(el => el.remove());
 
       const allWrappers = document.querySelectorAll('.button-wrapper');
       if (allWrappers.length > 0) {
-        const randomIndex = Math.floor(Math.random() * allWrappers.length);
-        const selectedWrapper = allWrappers[randomIndex];
-
-        // رابط صورة جينكس متحركة ومجربة 100% بحلفية شفافة
-        const jinxImg = document.createElement('img');
-        jinxImg.src = 'https://i.imgur.com/vHdf3gS.gif'; // صورة Chibi Jinx لطيفة ومتحركة بخلفية شفافة
-        jinxImg.className = 'jinx-peeker';
-        jinxImg.alt = 'Jinx';
-
-        // إدراجها داخل الحاوية الخارجية للزر لتتحرك بحرية من الأعلى
-        selectedWrapper.appendChild(jinxImg);
-      }
-    }
-
-    // تشغيل الدالة فور اكتمال تحميل الصفحة
-    window.addEventListener('DOMContentLoaded', injectRandomJinx);
-
-    // إصلاح مشكلة الرجوع للخلف وإعادة إنعاش الأزرار ومكان Jinx العشوائي
-    window.addEventListener('pageshow', function(event) {
-      if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
-        document.querySelectorAll('.ship-btn').forEach(button => {
-          button.classList.remove('animating');
-        });
-        injectRandomJinx();
-      }
-    });
-
-    // سكريبت تبديل وحفظ الوضع ليلي / نهاري
-    const themeToggleBtn = document.getElementById('themeToggle');
-    const themeIcon = document.getElementById('themeIcon');
-    const popoutIcon = document.getElementById('popoutIcon');
-    const currentTheme = localStorage.getItem('theme');
-
-    if (currentTheme === 'light') {
-      document.body.classList.add('light-theme');
-      themeIcon.textContent = '☀️';
-    } else {
-      themeIcon.textContent = '🌙';
-    }
-
-    themeToggleBtn.addEventListener('click', () => {
-      themeToggleBtn.classList.add('popout-active');
-      const outgoingIcon = document.body.classList.contains('light-theme') ? '☀️' : '🌙';
-      popoutIcon.textContent = outgoingIcon;
-
-      document.body.classList.toggle('light-theme');
-      
-      let theme = 'dark';
-      if (document.body.classList.contains('light-theme')) {
-        theme = 'light';
-        themeIcon.textContent = '☀️';
-      } else {
-        themeIcon.textContent = '🌙';
-      }
-      
-      localStorage.setItem('theme', theme);
-      
-      setTimeout(() => {
-        themeToggleBtn.classList.remove('popout-active');
-      }, 400);
-    });
-  </script>
-
-</body>
-</html>
+        const randomIndex = Math.floor(Math.random()
 
