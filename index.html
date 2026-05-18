@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="css/brands.css">
 
     <style>
-      /* متغيرات الألوان للوضعين الليلي والنهاري */
       :root {
         --bg-color: #07080B;
         --text-color: #E4E6EB;
@@ -46,10 +45,11 @@
         height: 128px;
         object-fit: cover;
       }
-      .avatar:hover {
-        transform: scale(1.05);
-      }
+      .avatar:hover { transform: scale(1.05); }
+      
       .button {
+        display: block;
+        width: 100%;
         border-radius: 16px !important;
         font-weight: 600 !important;
         margin-bottom: 16px !important;
@@ -65,21 +65,19 @@
         color: var(--text-color) !important;
         font-weight: 800 !important;
         letter-spacing: -0.03em;
-        transition: color 0.3s ease;
       }
       p {
         color: var(--sub-text) !important;
         font-size: 0.95rem;
         margin-bottom: 16px;
-        transition: color 0.3s ease;
       }
-      footer, footer a {
+      footer {
         color: #64748B !important;
         font-size: 0.8rem;
         margin-top: 50px;
       }
 
-      /* ستايل زر التبديل المرتب المدمج */
+      /* زر تبديل الوضع */
       .theme-toggle-btn {
         position: relative;
         background: var(--card-bg);
@@ -100,30 +98,29 @@
         -webkit-tap-highlight-color: transparent;
       }
       .theme-toggle-btn:hover { transform: translateY(-2px); }
-      .theme-toggle-btn:active { transform: translateY(1px) scale(0.98); }
+      .theme-toggle-btn.popout-active #popoutIcon { animation: popOut 0.4s ease forwards; }
+      #popoutIcon { position: absolute; pointer-events: none; opacity: 0; }
       .toggle-text { margin-left: 8px; font-weight: 500; font-size: 0.9rem; }
 
       @keyframes popOut {
         0% { transform: translate(0, 0) scale(1); opacity: 0; }
-        30% { opacity: 0.8; }
         100% { transform: translate(-3px, -35px) scale(1.4); opacity: 0; }
       }
-      .theme-toggle-btn.popout-active #popoutIcon { animation: popOut 0.4s ease forwards; }
-      #popoutIcon { position: absolute; pointer-events: none; opacity: 0; }
 
       /* ==========================================
-         🔥 ستايل زر الشحن الاحترافي (Dispatch Button) 🔥
+         🔥 ستايل حركة الشحن العام لجميع الأزرار 🔥
          ========================================== */
       .ship-btn {
         appearance: none;
         position: relative;
-        overflow: hidden; /* يمنع خروج الشاحنة خارج إطار الزر الدائري */
+        overflow: hidden !important;
         cursor: pointer;
-        -webkit-mask-image: -webkit-radial-gradient(white, black); /* حواف ناعمة للموبايل */
+        height: 52px !important; 
+        border-radius: 32px !important; /* شكل كبسولة عصري لكل الأزرار */
+        -webkit-mask-image: -webkit-radial-gradient(white, black);
         -webkit-tap-highlight-color: transparent;
       }
 
-      /* محتوى الزر الأصلي (النص والأيقونة) */
       .ship-btn .btn-content {
         display: flex;
         align-items: center;
@@ -133,7 +130,6 @@
         transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s;
       }
 
-      /* حاوية الشاحنة المخفية في اليسار */
       .ship-btn .truck-container {
         position: absolute;
         top: 0;
@@ -147,49 +143,44 @@
       }
 
       .ship-btn .truck {
-        font-size: 1.6rem;
+        font-size: 1.7rem;
+        z-index: 2;
       }
 
-      /* الصندوق الصغير المشحون */
       .ship-btn .box {
         font-size: 1.1rem;
-        margin-left: -8px;
+        margin-left: -12px;
         opacity: 0;
-        transform: translateY(-20px);
+        transform: translateY(-25px);
+        z-index: 1;
       }
 
-      /* --- تأثيرات الحركة عند الضغط --- */
-      
-      /* خروج النص الأصلي لليمين */
+      /* أنيميشن التنشيط */
       .ship-btn.animating .btn-content {
-        transform: translateX(160%);
+        transform: translateX(150%);
         opacity: 0;
       }
 
-      /* حركة انطلاق ومرور الشاحنة */
       .ship-btn.animating .truck-container {
-        animation: driveAndDeliver 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        animation: driveAndDeliver 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
       }
 
-      /* حركة سقوط الصندوق داخل الشاحنة */
       .ship-btn.animating .box {
-        animation: dropBoxInTruck 1.6s ease forwards;
+        animation: dropBoxInTruck 1.8s ease forwards;
       }
 
-      /* أنيميشن حركة الشاحنة */
       @keyframes driveAndDeliver {
         0% { left: -60px; }
-        35% { left: 40%; }  /* تتوقف في المنتصف قليلاً للتسليم */
-        65% { left: 43%; }
-        100% { left: 110%; } /* تنطلق خارج الزر */
+        30% { left: 40%; }  
+        60% { left: 45%; }
+        100% { left: 110%; } 
       }
 
-      /* أنيميشن سقوط الصندوق */
       @keyframes dropBoxInTruck {
-        0%, 30% { opacity: 0; transform: translateY(-20px); }
-        45% { opacity: 1; transform: translateY(2px); }
-        65% { opacity: 1; transform: translateY(2px); }
-        100% { opacity: 0; transform: translateX(10px); }
+        0%, 25% { opacity: 0; transform: translateY(-25px); }
+        40% { opacity: 1; transform: translateY(4px); } 
+        60% { opacity: 1; transform: translateY(4px); }
+        100% { opacity: 0; transform: translateX(15px); }
       }
     </style>
   </head>
@@ -220,31 +211,43 @@
             <div class="btn-content">
               <img class="icon" aria-hidden="true" src="images/icons/discord.svg" alt="Discord Logo">Discord
             </div>
-            <div class="truck-container">
-              <span class="truck">🚚</span>
-              <span class="box">📦</span>
-            </div>
+            <div class="truck-container"><span class="truck">🚚</span><span class="box">📦</span></div>
           </button>
 
-          <a class="button button-instagram" href="https://www.instagram.com/skrt7_66?igsh=bWZzeHdhNDJtOGo2" target="_blank" rel="noopener" role="button">
-            <img class="icon" aria-hidden="true" src="images/icons/instagram.svg" alt="Instagram Logo">Instagram
-          </a>
+          <button class="button button-instagram ship-btn" data-url="https://www.instagram.com/skrt7_66?igsh=bWZzeHdhNDJtOGo2" role="button">
+            <div class="btn-content">
+              <img class="icon" aria-hidden="true" src="images/icons/instagram.svg" alt="Instagram Logo">Instagram
+            </div>
+            <div class="truck-container"><span class="truck">🚚</span><span class="box">📦</span></div>
+          </button>
 
-          <a class="button button-github" href="https://github.com/SKRT7-0day" target="_blank" rel="noopener" role="button">
-            <img class="icon" aria-hidden="true" src="images/icons/github.svg" alt="GitHub Logo">GitHub
-          </a>
+          <button class="button button-github ship-btn" data-url="https://github.com/SKRT7-0day" role="button">
+            <div class="btn-content">
+              <img class="icon" aria-hidden="true" src="images/icons/github.svg" alt="GitHub Logo">GitHub
+            </div>
+            <div class="truck-container"><span class="truck">🚚</span><span class="box">📦</span></div>
+          </button>
 
-          <a class="button button-yt" href="https://www.youtube.com/@SKRT7-v5h" target="_blank" rel="noopener" role="button">
-            <img class="icon" aria-hidden="true" src="images/icons/youtube.svg" alt="YouTube Logo">YouTube
-          </a>
+          <button class="button button-yt ship-btn" data-url="https://www.youtube.com/@SKRT7-v5h" role="button">
+            <div class="btn-content">
+              <img class="icon" aria-hidden="true" src="images/icons/youtube.svg" alt="YouTube Logo">YouTube
+            </div>
+            <div class="truck-container"><span class="truck">🚚</span><span class="box">📦</span></div>
+          </button>
 
-          <a class="button button-spotify" href="https://open.spotify.com/user/315dy6lskacyrxfg42pk7x5atm44?si=9SMX0LY6QUeOpEpVEjsmMQ" target="_blank" rel="noopener" role="button">
-            <img class="icon" aria-hidden="true" src="images/icons/spotify.svg" alt="Spotify Logo">Spotify
-          </a>
+          <button class="button button-spotify ship-btn" data-url="https://open.spotify.com/user/315dy6lskacyrxfg42pk7x5atm44?si=9SMX0LY6QUeOpEpVEjsmMQ" role="button">
+            <div class="btn-content">
+              <img class="icon" aria-hidden="true" src="images/icons/spotify.svg" alt="Spotify Logo">Spotify
+            </div>
+            <div class="truck-container"><span class="truck">🚚</span><span class="box">📦</span></div>
+          </button>
 
-          <a class="button button-faceb" href="https://www.facebook.com/share/18giPaZseb/" target="_blank" rel="noopener" role="button">
-            <img class="icon" aria-hidden="true" src="images/icons/facebook.svg" alt="Facebook Logo">Facebook
-          </a>
+          <button class="button button-faceb" style="background-color: #1877F2 !important; color: white !important;" class="ship-btn" data-url="https://www.facebook.com/share/18giPaZseb/" role="button">
+            <div class="btn-content">
+              <img class="icon" aria-hidden="true" src="images/icons/facebook.svg" alt="Facebook Logo">Facebook
+            </div>
+            <div class="truck-container"><span class="truck">🚚</span><span class="box">📦</span></div>
+          </button>
 
         </div>
 
@@ -257,7 +260,7 @@
   </div>
 
   <script>
-    // --- سكريبت تشغيل حركة زر الشحن والتوجيه للرابط ---
+    // تشغيل الحركة الحركية لكل الأزرار ديناميكياً عند الضغط
     document.querySelectorAll('.ship-btn').forEach(button => {
       button.addEventListener('click', function(e) {
         e.preventDefault();
@@ -270,46 +273,13 @@
         setTimeout(() => {
           window.open(targetUrl, '_blank');
           this.classList.remove('animating');
-        }, 1500);
+        }, 1700);
       });
     });
 
-    // --- سكريبت تبديل الوضع المحفوظ ---
+    // سكريبت تبديل حفظ الوضع ليلي / نهاري
     const themeToggleBtn = document.getElementById('themeToggle');
     const themeIcon = document.getElementById('themeIcon');
     const popoutIcon = document.getElementById('popoutIcon');
-    const currentTheme = localStorage.getItem('theme');
-
-    if (currentTheme === 'light') {
-      document.body.classList.add('light-theme');
-      themeIcon.textContent = '☀️';
-    } else {
-      themeIcon.textContent = '🌙';
-    }
-
-    themeToggleBtn.addEventListener('click', () => {
-      themeToggleBtn.classList.add('popout-active');
-      const outgoingIcon = document.body.classList.contains('light-theme') ? '☀️' : '🌙';
-      popoutIcon.textContent = outgoingIcon;
-
-      document.body.classList.toggle('light-theme');
-      
-      let theme = 'dark';
-      if (document.body.classList.contains('light-theme')) {
-        theme = 'light';
-        themeIcon.textContent = '☀️';
-      } else {
-        themeIcon.textContent = '🌙';
-      }
-      
-      localStorage.setItem('theme', theme);
-      
-      setTimeout(() => {
-        themeToggleBtn.classList.remove('popout-active');
-      }, 400);
-    });
-  </script>
-
-</body>
-</html>
+    const currentTheme = localStorage.getItem('theme
 
