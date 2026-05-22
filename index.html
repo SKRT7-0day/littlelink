@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>SKRT7 | Bio</title>
-    <link rel="icon" type="image/x-icon" href="images/avatar.png">
+    <link class="brand-avatar" rel="icon" type="image/x-icon" href="images/avatar.png">
 
     <meta name="description" content="SKRT7 Personal Space and Links">
     <meta name="author" content="SKRT7">
@@ -69,35 +69,68 @@
       }
 
       /* ==========================================
-         ✨ كود أنميشن تلوين الاسم ✨
+         🎉 كود أنميشن الاحتفال المبهج (Celebration Effect) 🎉
          ========================================== */
-      h1 {
-        margin: 15px 0;
+      .celebration-container {
+        position: relative;
+        display: inline-block;
+        margin: 15px auto;
+        padding: 0 20px;
+        text-align: center;
       }
       
-      .animated-name {
+      .celebration-name {
+        font-size: 3rem;
         font-weight: 900 !important;
         letter-spacing: -0.03em;
-        /* تدرج الألوان للوضع الليلي */
-        background: linear-gradient(90deg, #E4E6EB, #a855f7, #3b82f6, #E4E6EB);
-        background-size: 300% 100%;
+        /* تدرج لوني احتفالي صارخ ومتحرك */
+        background: linear-gradient(45deg, #ff007f, #a855f7, #3b82f6, #ffd700, #ff007f);
+        background-size: 200% auto;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        animation: textGradientFill 4s linear infinite;
         display: inline-block;
+        /* دمج أنميشن حركة الألوان مع نبض الحفلة الاهتزازي المبهج */
+        animation: celebrateColors 3s linear infinite, partyPulse 1.2s ease-in-out infinite alternate;
       }
 
-      /* تدرج الألوان للوضع الفاتح ليكون واضحاً أكثر */
-      .light-theme .animated-name {
-        background: linear-gradient(90deg, #0F172A, #a855f7, #3b82f6, #0F172A);
-        background-size: 300% 100%;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+      @keyframes celebrateColors {
+        0% { background-position: 0% center; }
+        100% { background-position: 200% center; }
       }
 
-      @keyframes textGradientFill {
-        0% { background-position: 0% 50%; }
-        100% { background-position: 100% 50%; }
+      @keyframes partyPulse {
+        0% { 
+          transform: scale(1); 
+          filter: drop-shadow(0 0 2px rgba(168, 85, 247, 0.3)); 
+        }
+        100% { 
+          transform: scale(1.06); 
+          filter: drop-shadow(0 0 12px #a855f7) drop-shadow(0 0 20px #ff007f); 
+        }
+      }
+
+      /* عناصر القصاصات الورقية (Confetti) المتطايرة حول الاسم */
+      .confetti {
+        position: absolute;
+        width: 7px;
+        height: 7px;
+        border-radius: 2px;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 10;
+      }
+      /* توزيع عشوائي للقصاصات الملونة وأوقات انطلاقها */
+      .c1 { background: #ff007f; left: 15%; animation: floatConfetti 2s ease-in-out infinite; }
+      .c2 { background: #ffd700; left: 35%; animation: floatConfetti 2.4s ease-in-out infinite 0.4s; }
+      .c3 { background: #3b82f6; left: 55%; animation: floatConfetti 2.1s ease-in-out infinite 0.2s; }
+      .c4 { background: #a855f7; left: 75%; animation: floatConfetti 2.6s ease-in-out infinite 0.6s; }
+      .c5 { background: #00ffcc; left: 90%; animation: floatConfetti 1.8s ease-in-out infinite 0.3s; }
+
+      @keyframes floatConfetti {
+        0% { transform: translateY(25px) translateX(0) rotate(0deg); opacity: 0; }
+        30% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { transform: translateY(-45px) translateX(15px) rotate(360deg); opacity: 0; }
       }
       /* ========================================== */
 
@@ -208,7 +241,14 @@
         <img class="avatar avatar--rounded" src="images/avatar.png" alt="SKRT7">
 
         <h1>
-          <div class="animated-name">SKRT7.</div>
+          <div class="celebration-container">
+            <span class="celebration-name">SKRT7.</span>
+            <span class="confetti c1"></span>
+            <span class="confetti c2"></span>
+            <span class="confetti c3"></span>
+            <span class="confetti c4"></span>
+            <span class="confetti c5"></span>
+          </div>
         </h1>
 
         <p>Developer & Discord Server Manager. Welcome to my space.</p>
