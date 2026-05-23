@@ -216,7 +216,7 @@
     @keyframes auroraWave { 0% { transform: translateY(-100%) translateX(-50%); } 100% { transform: translateY(-100%) translateX(50%); } }
 
     /* ==========================================
-       🚚 أزرار الشاحنات (روابط التواصل) - تم إصلاح موضع الصندوق والأنيميشن بالكامل
+       🚚 أزرار الشاحنات (روابط التواصل) - تم الإصلاح الشامل هنا
        ========================================== */
     .button-stack { width: 90%; max-width: 400px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px; }
     
@@ -233,29 +233,27 @@
       transition: opacity 0.3s, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
     }
     
-    /* إلغاء الفليكس وتثبيت مساحة محددة للشاحنة والصندوق بالـ absolute لضبط الدقة */
+    /* جعل الحاوية مخفية تماماً لمنع ظهور الشاحنة في البداية */
     .truck-container { 
       position: absolute; top: 0; left: -80px; width: 80px; height: 100%; 
-      pointer-events: none; 
+      pointer-events: none; opacity: 0; transition: opacity 0.2s ease;
     }
     
-    /* تعديل وضع الشاحنة لتكون في النصف الأيمن من حاويتها المتحركة */
     .truck { 
       font-size: 1.6rem; z-index: 2; position: absolute; 
       left: 28px; top: 50%; transform: translateY(-50%); 
     }
     
-    /* تعديل وضع الصندوق الافتراضي ليكون خلف الشاحنة تماماً (يسارها) */
     .box { 
       font-size: 1.1rem; position: absolute; 
       left: 10px; top: -30px; opacity: 0; z-index: 1; 
     }
 
+    /* الأنيميشن يتم تفعيله عند الضغط وبدء تأثير الـ animating فقط */
     .ship-btn.animating .btn-content { transform: translateX(100%); opacity: 0; }
-    .ship-btn.animating .truck-container { animation: drive 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+    .ship-btn.animating .truck-container { opacity: 1; animation: drive 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
     .ship-btn.animating .box { animation: drop 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
 
-    /* تحسين مسار حركة الشاحنة والكرتونة باستخدام الـ left بدلاً من الـ translate العشوائي */
     @keyframes drive { 
       0% { left: -80px; } 
       35% { left: calc(50% - 40px); } 
@@ -263,7 +261,6 @@
       100% { left: 100%; } 
     }
     
-    /* تعديل أنيميشن السقوط ليستقر الصندوق فوق الشاحنة ويتحرك معها بدون الاندفاع للأمام وتخريب الشكل */
     @keyframes drop { 
       0% { opacity: 0; transform: translateY(0); } 
       30% { opacity: 1; transform: translateY(44px); } 
@@ -541,3 +538,4 @@
   </script>
 </body>
 </html>
+
