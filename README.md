@@ -1,4 +1,4 @@
-![Logo](https://cdn.cottle.cloud/GitHub/LittleLink/littlelink.gif)
+![Logo](https://i.postimg.cc/v8g9QDHb/8e92b9a5e0df61fe6d87b767ebfbd7ae.jpg)
 
 # LittleLink
 The DIY self-hosted LinkTree alternative. LittleLink has more than 100 branded button styles you can easily use, with more regularly added by our community in this repo and in [LittleLink Extended](https://github.com/sethcottle/littlelink-extended).
