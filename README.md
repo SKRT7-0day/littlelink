@@ -11,7 +11,7 @@ Want to make your own buttons for LittleLink but you're not too sure where to st
 ### 🌞 Themes and Accessibility
 LittleLink offers `auto`, `light`, and `dark` themes right out of the box. If the default color schemes don't match your preference, you can easily customize them by updating the values in `style.css`. You can set any of the themes right in `index.html`. To enhance visual accessibility in both `light` and `dark` modes, buttons lacking sufficient contrast with the background are outlined with an inverse stroke to ensure visibility. While LittleLink emphasizes accessibility, it's important to acknowledge that not all brands incorporated into LittleLink achieve this standard. Branded buttons that come into LittleLink always retain the original essence of the brand and some branded buttons might fall short of optimal accessibility in terms of contrast.
 
-![Theme](https://cdn.cottle.cloud/GitHub/LittleLink/ThemeSupport.gif)
+![Theme](https://i.postimg.cc/Jn7DV4YM/lv-0-20260524201903.gif)
 
 ---
 ### 🥇 Performance
